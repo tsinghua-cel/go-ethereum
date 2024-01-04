@@ -172,10 +172,10 @@ func (oracle *Oracle) resolveBlockRange(ctx context.Context, reqEnd rpc.BlockNum
 		case rpc.LatestBlockNumber:
 			// Retrieved above.
 			resolved = headBlock
-		case rpc.SafeBlockNumber:
-			resolved, err = oracle.backend.HeaderByNumber(ctx, rpc.SafeBlockNumber)
-		case rpc.FinalizedBlockNumber:
-			resolved, err = oracle.backend.HeaderByNumber(ctx, rpc.FinalizedBlockNumber)
+		//case rpc.SafeBlockNumber:
+		//	resolved, err = oracle.backend.HeaderByNumber(ctx, rpc.SafeBlockNumber)
+		//case rpc.FinalizedBlockNumber:
+		//	resolved, err = oracle.backend.HeaderByNumber(ctx, rpc.FinalizedBlockNumber)
 		case rpc.EarliestBlockNumber:
 			resolved, err = oracle.backend.HeaderByNumber(ctx, rpc.EarliestBlockNumber)
 		}

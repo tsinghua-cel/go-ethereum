@@ -892,10 +892,10 @@ func (fb *filterBackend) HeaderByNumber(ctx context.Context, number rpc.BlockNum
 		return nil, nil
 	case rpc.LatestBlockNumber:
 		return fb.bc.CurrentHeader(), nil
-	case rpc.FinalizedBlockNumber:
-		return fb.bc.CurrentFinalBlock(), nil
-	case rpc.SafeBlockNumber:
-		return fb.bc.CurrentSafeBlock(), nil
+	//case rpc.FinalizedBlockNumber:
+	//	return fb.bc.CurrentFinalBlock(), nil
+	//case rpc.SafeBlockNumber:
+	//	return fb.bc.CurrentSafeBlock(), nil
 	default:
 		return fb.bc.GetHeaderByNumber(uint64(number.Int64())), nil
 	}

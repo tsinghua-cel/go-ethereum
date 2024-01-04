@@ -268,12 +268,12 @@ func (api *DebugAPI) DumpBlock(blockNr rpc.BlockNumber) (state.Dump, error) {
 		return stateDb.RawDump(opts), nil
 	}
 	var block *types.Block
-	if blockNr == rpc.LatestBlockNumber {
+	if blockNr == rpc.LatestBlockNumber || blockNr == rpc.FinalizedBlockNumber || blockNr == rpc.SafeBlockNumber {
 		block = api.eth.blockchain.CurrentBlock()
-	} else if blockNr == rpc.FinalizedBlockNumber {
-		block = api.eth.blockchain.CurrentFinalizedBlock()
-	} else if blockNr == rpc.SafeBlockNumber {
-		block = api.eth.blockchain.CurrentSafeBlock()
+		//} else if blockNr == rpc.FinalizedBlockNumber {
+		//	block = api.eth.blockchain.CurrentFinalizedBlock()
+		//} else if blockNr == rpc.SafeBlockNumber {
+		//	block = api.eth.blockchain.CurrentSafeBlock()
 	} else {
 		block = api.eth.blockchain.GetBlockByNumber(uint64(blockNr))
 	}
@@ -348,12 +348,12 @@ func (api *DebugAPI) AccountRange(blockNrOrHash rpc.BlockNumberOrHash, start hex
 			_, stateDb = api.eth.miner.Pending()
 		} else {
 			var block *types.Block
-			if number == rpc.LatestBlockNumber {
+			if number == rpc.LatestBlockNumber || number == rpc.SafeBlockNumber || number == rpc.FinalizedBlockNumber {
 				block = api.eth.blockchain.CurrentBlock()
-			} else if number == rpc.FinalizedBlockNumber {
-				block = api.eth.blockchain.CurrentFinalizedBlock()
-			} else if number == rpc.SafeBlockNumber {
-				block = api.eth.blockchain.CurrentSafeBlock()
+				//} else if number == rpc.FinalizedBlockNumber {
+				//	block = api.eth.blockchain.CurrentFinalizedBlock()
+				//} else if number == rpc.SafeBlockNumber {
+				//	block = api.eth.blockchain.CurrentSafeBlock()
 			} else {
 				block = api.eth.blockchain.GetBlockByNumber(uint64(number))
 			}
